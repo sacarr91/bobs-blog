@@ -1,18 +1,8 @@
+
 [
     {
-      "name": "Steph",
-      "email": "sacarr91@gmail.com",
-      "password": "passwordSteph"
-    },
-    {
-      "name": "Emmaleigh",
-      "email": "ecarr210@gmail.com",
-      "password": "passwordEm"
-    },
-    {
-      "name": "Stacey",
-      "email": "ibstaceysandritter@hotmail.com",
-      "password": "passwordStace"
+        "name": "Tommy",
+        "password": "s0//P4$$w0rD",
+        "loggedIn": "false"
     }
-  ]
-  
+]
