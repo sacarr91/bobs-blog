@@ -1,8 +1,8 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-  const title = document.querySelector('#blog-name').value.trim();
-  const content = document.querySelector('#blog-desc').value.trim();
+  const title = document.querySelector('#blog-title').value.trim();
+  const content = document.querySelector('#blog-content').value.trim();
 
   if (title && content) {
     const response = await fetch(`/api/blogs`, {
