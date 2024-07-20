@@ -1,8 +1,15 @@
+const session = require("express-session");
+
 const withAuth = (req, res, next) => {
   // If the user is not logged in, redirect the request to the login route
   if (!req.session.logged_in) {
-    res.redirect('/login');
+    // res.redirect('/login');
+    console.log('you are not logged in');
+    console.log(`session.logged_in = ${session.logged_in}`)
+    next();
   } else {
+    console.log('you are logged in!');
+    console.log(`session.logged_in = ${session.logged_in}`)
     next();
   }
 };
