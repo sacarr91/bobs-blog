@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
-let sequelize = new Sequelize(process.env.DB_URI);
+let sequelize = new Sequelize(process.env.INTERNAL_DB_URL);
 
 
 module.exports = sequelize;
