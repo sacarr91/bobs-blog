@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class Author extends Model {
-  async function encryptPassword(authorData) {
+  async encryptPassword(authorData) {
   authorData.password = await bcrypt.hash(authorData.password, 10);
   return authorData;
 };

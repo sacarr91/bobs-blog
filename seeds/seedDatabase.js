@@ -1,6 +1,6 @@
-const { v4: uuidv4 } = require('uuid');
 const sequelize = require('../config/connection');
 const { Author, Blog } = require('../models');
+const { UUIDV4 } = require('sequelize');
 
 const authorData = require('./authorData.json');
 const blogData = require('./blogData.json');
@@ -11,7 +11,7 @@ const seedDatabase = async () => {
   for (const author of authorData) {
     await Author.create({
       ...author,
-      email: `${uuidv4()}@aol.com`
+      email: `${UUIDV4()}@aol.com`
     })
   };
 
