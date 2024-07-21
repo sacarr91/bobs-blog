@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { Author } = require('../../models');
 
 
 ////// SIGN UP
 
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.create({
+    const authorData = await Author.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password, 
@@ -14,10 +14,10 @@ router.post('/', async (req, res) => {
     });
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = userData.loggedIn;
+      req.session.author_id = authorData.id;
+      req.session.logged_in = authorData.loggedIn;
 
-      res.status(200).json(userData);
+      res.status(200).json(authorData);
     });
   } catch (err) {
     res.status(400).json(err);
@@ -29,16 +29,16 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const authorData = await Author.findOne({ where: { email: req.body.email } });
 
-    if (!userData) {
+    if (!authorData) {
       res
         .status(400)
-        .json({ message: 'No such user in the database. Please sign up or try again.' });
+        .json({ message: 'No such author in the database. Please sign up or try again.' });
       return;
     }
 
-    const validPassword = userData.checkPassword(req.body.password);
+    const validPassword = authorData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res
@@ -49,10 +49,10 @@ router.post('/login', async (req, res) => {
 
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.author_id = authorData.id;
       req.session.logged_in = true;
 
-      res.json({ user: userData, message: 'You are now logged in!' });
+      res.json({ author: authorData, message: 'You are now logged in!' });
     });
 
   } catch (err) {
@@ -61,10 +61,10 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', async (req, res) => {
-  const userData = await User.findOne({ where: { id: req.session.user_id } });
+  const authorData = await Author.findOne({ where: { id: req.session.author_id } });
 
-  userData.loggedIn = false;
-  await userData.save();
+  authorData.loggedIn = false;
+  await authorData.save();
 
   if (req.session.logged_in) {
     req.session.destroy(() => {
