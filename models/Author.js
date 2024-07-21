@@ -3,9 +3,14 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class Author extends Model {
-  checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
-  }
+  async function encryptPassword(authorData) {
+  authorData.password = await bcrypt.hash(authorData.password, 10);
+  return authorData;
+};
+
+checkPassword(loginPw) {
+  return bcrypt.compareSync(loginPw, this.password);
+}
 }
 
 Author.init(
