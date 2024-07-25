@@ -1,3 +1,4 @@
+require('dotenv').config();
 const sequelize = require('../config/connection');
 const { Author, Blog } = require('../models');
 const { UUIDV4 } = require('sequelize');
@@ -23,7 +24,6 @@ const seedDatabase = async () => {
         primaryKey: true,
         autoincrement: true
       },
-      date_created: `2001-12-23 14:39:53.662522-05`
     })
   };
 

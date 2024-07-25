@@ -17,7 +17,7 @@ AND pid <> pg_backend_pid();
 
 -- /////// End Stanley code //////////
 
-DROP DATABASE IF EXISTS carr_db;
-CREATE DATABASE carr_db;
+DROP DATABASE IF EXISTS bobs_blog;
+CREATE DATABASE bobs_blog;
 
-\c carr_db;
+\c bobs_blog;
