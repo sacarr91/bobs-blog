@@ -1,7 +1,12 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
-const sequelize = new Sequelize(process.env.EXTERNALURL);
+let sequelize = new Sequelize(process.env.EXTERNALURL,
+    {
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    });
 
 
 module.exports = sequelize;
