@@ -4,14 +4,14 @@ const loginFormHandler = async (event) => {
   event.preventDefault();
 
   // Collect values from the login form
-  const email = document.querySelector('#email-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+  const emailData = document.querySelector('#email-login').value.trim();
+  const passwordData = document.querySelector('#password-login').value.trim();
 
-  if (email && password) {
+  if (emailData && passwordData) {
     // Send a POST request to the API endpoint
     const response = await fetch('/api/authors/login', {
       method: 'POST',
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ email: emailData, password: passwordData }),
       headers: { 'Content-Type': 'application/json' },
     });
 
@@ -31,17 +31,17 @@ const loginFormHandler = async (event) => {
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#name-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
+  const nameData = document.querySelector('#name-signup').value.trim();
+  const emailData = document.querySelector('#email-signup').value.trim();
+  const passwordData = document.querySelector('#password-signup').value.trim();
 
-  if (name && email && password) {
+  if (nameData && emailData && passwordData) {
     const response = await fetch('/api/authors', {
       method: 'POST',
       body: JSON.stringify({
-        name: name, 
-        email: email, 
-        password: password, 
+        name: nameData, 
+        email: emailData, 
+        password: passwordData, 
       }),
       headers: { 'Content-Type': 'application/json' }
     });
