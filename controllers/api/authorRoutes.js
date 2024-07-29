@@ -6,16 +6,12 @@ const { Author } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
-    const authorData = await Author.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password, 
-      loggedIn: true
-    });
+    const authorData = await Author.create(req.body);
 
     req.session.save(() => {
       req.session.author_id = authorData.id;
-      req.session.logged_in = authorData.loggedIn;
+      req.session.author_name = authorData.name;
+      req.session.logged_in = true;
 
       res.status(200).json(authorData);
     });
@@ -50,6 +46,7 @@ router.post('/login', async (req, res) => {
 
     req.session.save(() => {
       req.session.author_id = authorData.id;
+      req.session.author_name = authorData.name;
       req.session.logged_in = true;
 
       res.json({ author: authorData, message: 'You are now logged in!' });
@@ -61,11 +58,6 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', async (req, res) => {
-  const authorData = await Author.findOne({ where: { id: req.session.author_id } });
-
-  authorData.loggedIn = false;
-  await authorData.save();
-
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();

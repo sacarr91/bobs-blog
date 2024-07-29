@@ -40,12 +40,16 @@ const signupFormHandler = async (event) => {
   if (name && email && password) {
     const response = await fetch('/api/authors', {
       method: 'POST',
-      body: JSON.stringify({ "name": name, "email": email, "password": password, "loggedIn": true }),
-      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name, 
+        email: email, 
+        password: password, 
+      }),
+      headers: { 'Content-Type': 'application/json' }
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/');
     } else {
       alert(response.statusText);
     }
